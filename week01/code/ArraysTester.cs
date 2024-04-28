@@ -1,8 +1,10 @@
-public static class ArraysTester {
+public static class ArraysTester
+{
     /// <summary>
     /// Entry point for the tests
     /// </summary>
-    public static void Run() {
+    public static void Run()
+    {
         // Sample Test Cases (may not be comprehensive)
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         double[] multiples = MultiplesOf(7, 5);
@@ -34,14 +36,20 @@ public static class ArraysTester {
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     private static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Create output array
+        var result = new double[length];
 
-        return new double[0]; // replace this return statement with your own
+        // Loop for the given lenght
+        for (int i = 0; i < length; i++)
+        {
+            // Add the multiple to the array
+            result[i] = number * (i + 1);
+        }
+
+        // Return the result array
+        return result;
     }
-    
+
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
     /// <c>&lt;List&gt;{1, 2, 3, 4, 5, 6, 7, 8, 9}</c> and an amount is 3 then the list returned should be 
@@ -52,10 +60,35 @@ public static class ArraysTester {
     /// </summary>
     private static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // New int List
+        List<int> result = new List<int>();
 
+        // Loop for the length of the given List
+        for (int i = 0; i < data.Count; i++)
+        {
+            // If the subtracting the move amount results in 
+            //  a negative
+            if (i - amount < 0)
+            {
+                // Start at the end of the list and move the difference
+                //  between the current loop value and the move amount
+                result.Add(data[data.Count + (i - amount)]);
+            }
+            else
+            {
+                // Add the difference between the current loop value 
+                //  and the move amount
+                result.Add(data[i - amount]);
+            }
+        }
+
+        // Clear the given List
+        data.Clear();
+        // Iterate over the result List
+        foreach (var item in result)
+        {
+            // Add each item to the given List
+            data.Add(item);
+        }
     }
 }
