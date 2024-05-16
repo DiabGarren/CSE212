@@ -7,7 +7,5 @@ public class Program
         Console.WriteLine("\n======================\nDuplicate Counter\n======================");
         DuplicateCounter.Run();
 
-        Console.WriteLine("\n======================\nTranslator\n======================");
-        Translator.Run();
     }
 }
