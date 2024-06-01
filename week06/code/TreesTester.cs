@@ -1,8 +1,10 @@
-public static class TreesTester {
+public static class TreesTester
+{
     /// <summary>
     /// Entry point for the Prove 9 tests
     /// </summary>
-    public static void Run() {
+    public static void Run()
+    {
         // Sample Test Cases (may not be comprehensive)
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         BinarySearchTree tree = new BinarySearchTree();
@@ -27,7 +29,8 @@ public static class TreesTester {
         Console.WriteLine(tree.Contains(9)); // False
 
         Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========");
-        foreach (var value in tree.Reverse()) {
+        foreach (var value in tree.Reverse())
+        {
             Console.WriteLine(value); // 10, 7, 6, 5, 4, 3, 1
         }
 
@@ -60,7 +63,8 @@ public static class TreesTester {
     /// a range (first to last) to consider.  For the first call, the full range of 0 to
     /// Length-1 used.
     /// </summary>
-    private static BinarySearchTree CreateTreeFromSortedList(int[] sortedNumbers) {
+    private static BinarySearchTree CreateTreeFromSortedList(int[] sortedNumbers)
+    {
         var bst = new BinarySearchTree(); // Create an empty BST to start with 
         InsertMiddle(sortedNumbers, 0, sortedNumbers.Length - 1, bst);
         return bst;
@@ -96,7 +100,37 @@ public static class TreesTester {
     /// <param name="first">the first index in the sortedNumbers to insert</param>
     /// <param name="last">the last index in the sortedNumbers to insert</param>
     /// <param name="bst">the BinarySearchTree in which to insert the values</param>
-    private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst) {
-        // TODO Start Problem 5
+    private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
+    {
+        if (first < last)
+        {
+            double avg = (first + last) / 2;
+            int mid = (int)Math.Ceiling(avg);
+            bst.Insert(sortedNumbers[mid]);
+
+
+            int[] leftNumbers = new int[mid];
+            for (int i = 0; i < mid; i++)
+            {
+                leftNumbers[i] = sortedNumbers[i];
+            }
+            if (leftNumbers.Length >= 1)
+            {
+                InsertMiddle(leftNumbers, 0, leftNumbers.Length - 1, bst);
+            }
+
+
+            int[] rightNumbers = new int[last - mid];
+            for (int i = mid + 1; i <= last; i++)
+            {
+                rightNumbers[i - mid - 1] = sortedNumbers[i];
+            }
+            if (rightNumbers.Length >= 1)
+            {
+                InsertMiddle(rightNumbers, 0, rightNumbers.Length - 1, bst);
+            }
+        }
+        else if (first == last)
+            bst.Insert(sortedNumbers[first]);
     }
 }
